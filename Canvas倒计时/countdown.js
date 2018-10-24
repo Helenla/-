@@ -122,7 +122,7 @@ function addBalls(x, y, num) {
           vy: -5,
           color: colors[ Math.floor( Math.random()*colors.length ) ]
         }
-        console.log(aBall)
+        // console.log(aBall)
         balls.push(aBall);
       }
     }
