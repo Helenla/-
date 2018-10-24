@@ -6,7 +6,8 @@ let WINDOW_WIDTH = 1024,
     MARGIN_LEFT = 30;
 let  curShowTimeSeconds = 0;
 let balls = [];
-const endTime = new Date(2018,9,23,17,0,0);
+const endTime = new Date();
+endTime.setTime(endTime.getTime() + 3600*1000);
 const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]
 
 function drawCanvas() {
