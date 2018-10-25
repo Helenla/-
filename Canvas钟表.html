@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>时钟表</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    #clocks {
+      display: block;
+      margin: 20px auto;
+      /* border: 1px solid black; */
+    }
+  </style>
+</head>
+<body>
+  <canvas id="clocks">
+    您的浏览器不支持canvas，请更换浏览器~
+  </canvas>
+  <script>
+    let canvas = document.getElementById('clocks');
+    let ctx = canvas.getContext('2d');
+    let r = 100; // 表盘半径
+    let curHour = 0, curMinute = 0;
+    canvas.width = 800;
+    canvas.height = 600;
+
+    function drawClocks() {
+
+      // let gradient = ctx.createLinearGradient(0, 0, 300, 0);
+      // ctx.addColorStop(0, 'black');
+      // ctx.addColorStop(1, 'white');
+      // ctx.fillStyle = gradient;
+
+      ctx.lineCap = 'round';
+
+      // 时针
+      drawHour()
+      
+      // 分针
+      drawMinute()
+
+      // 表盘
+      drawDial()
+      smallDial()
+      dialText()
+
+      setInterval(function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // 阴影
+        ctx.shadowColor = 'gray';
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 50;
+        let date = new Date();
+        let Hours = date.getHours();
+        let Minutes = date.getMinutes();
+        let Seconds = date.getSeconds();
+        drawHour(Hours, Minutes);
+        drawMinute(Minutes);
+        drawSeconds(Seconds);
+        drawDial();
+        smallDial();
+        dialText();
+      }, 1000)
+
+    }
+    function dialText() {
+      for (let i = 1; i <= 12; i++) {
+        ctx.save();
+        let rotate = i/12 * 2*Math.PI,
+            Tx = canvas.width/2 + (r-15)*Math.sin(rotate),
+            Ty = canvas.height/2 - (r-15)*Math.cos(rotate)
+        ctx.font = 'bold 14px Arial';
+        ctx.fillText(i, Tx-5, Ty+5);
+        ctx.restore();
+      }
+    }
+
+    function drawDial () {
+      
+      for (let i = 0; i < 12; i++) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        let Hrotate = i * 2*Math.PI / 12,
+            x = canvas.width/2 + Math.floor(r*Math.sin(i*Math.PI/6)),
+            y = canvas.height/2 - Math.floor(r*Math.cos(i*Math.PI/6));
+        ctx.translate(x, y);
+        ctx.rotate(Hrotate);
+        ctx.translate(-x, -y);
+        ctx.moveTo(x, y+2);
+        ctx.lineTo(x, y+8);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+      }
+
+      for (let i = 0; i < 60; i++) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        let Hrotate = i * 2*Math.PI / 60,
+            x = canvas.width/2 + Math.floor(r*Math.sin(i*Math.PI/30)),
+            y = canvas.height/2 - Math.floor(r*Math.cos(i*Math.PI/30));
+        ctx.translate(x, y);
+        ctx.rotate(Hrotate);
+        ctx.translate(-x, -y);
+        ctx.moveTo(x, y+2);
+        ctx.lineTo(x, y+8);
+        ctx.strokeStyle = 'grey';
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+      }
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(canvas.width / 2, canvas.height / 2, r - 4, 0, 2*Math.PI, false);
+      ctx.arc(canvas.width / 2, canvas.height / 2, r, 0, 2*Math.PI, true);
+      ctx.arc(canvas.width / 2, canvas.height / 2, 4, 0, 2*Math.PI, false);
+      ctx.fillColor = 'black';
+      ctx.fill();
+      ctx.closePath();
+      ctx.restore();
+    }
+
+    function smallDial() {
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(canvas.width / 2, canvas.height / 2 + 40, r / 5, 0, 2*Math.PI, false);
+      ctx.arc(canvas.width / 2, canvas.height / 2 + 40, r / 5 - 2, 0, 2*Math.PI, true);
+      ctx.arc(canvas.width / 2, canvas.height / 2 + 40, 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.closePath();
+      ctx.restore();
+    }
+
+    function drawHour(Hours, Minutes) {
+
+      let H = Hours ? Hours : 0;
+      let M = Minutes ? Minutes : 0;
+      let rotate = Hours/12 * 2*Math.PI + Minutes/60 * Math.PI/6
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.lineWidth = 5;
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate(rotate);
+      ctx.translate(-canvas.width / 2, -canvas.height / 2);
+      ctx.moveTo(canvas.width / 2, canvas.height / 2);
+      ctx.lineTo(canvas.width / 2, canvas.height / 2 - 50);
+      ctx.stroke();
+      ctx.closePath();
+      ctx.restore();
+    }
+
+    function drawMinute(Minutes) {
+
+      let M = Minutes ? Minutes : 0;
+      let rotate = Minutes/60 * 2*Math.PI
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.lineWidth = 3;
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate(rotate);
+      ctx.translate(-canvas.width / 2, -canvas.height / 2);
+      ctx.moveTo(canvas.width / 2, canvas.height / 2);
+      ctx.lineTo(canvas.width / 2, canvas.height / 2 - 70);
+      ctx.stroke();
+      ctx.closePath();
+      ctx.restore();
+    }
+
+    function drawSeconds(Seconds) {
+      let S = Seconds ? Seconds : 0;
+      let rotate = Seconds/60 * 2*Math.PI
+      // console.log(S)
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.translate(canvas.width / 2, canvas.height / 2 + 40);
+      ctx.rotate(rotate);
+      ctx.translate(-canvas.width / 2, -canvas.height / 2 - 40);
+      ctx.moveTo(canvas.width / 2, canvas.height / 2 + 40);
+      ctx.lineTo(canvas.width / 2, canvas.height / 2 + 55);
+      ctx.strokeStyle = 'red';
+      ctx.stroke();
+      ctx.closePath();
+      ctx.restore();
+    }
+
+    drawClocks()
+  </script>
+</body>
+</html>
