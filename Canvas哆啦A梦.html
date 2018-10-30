@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>哆啦A梦</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+    }
+    #canvas {
+      /* border: 1px solid black; */
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas">
+    浏览器不支持，请更换浏览器！
+  </canvas>
+  <script>
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d');
+    canvas.width = 800;
+    canvas.height = 800;
+    // 头形状
+    ctx.beginPath();
+    ctx.lineWidth = 3;
+    ctx.arc(400, 200, 160, 0, 2*Math.PI);
+    ctx.fillStyle = "#0bb0da";
+    ctx.strokeStyle = '#000c0f';
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    
+    // 下半身
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.moveTo(280, 320);
+    ctx.lineTo(200, 400);
+    ctx.lineTo(240, 440);
+    ctx.lineTo(280, 400);
+
+    ctx.lineTo(280, 520);
+    // ctx.lineTo(380, 520);
+
+    // ctx.lineTo(420, 520);
+    ctx.lineTo(520, 520);
+
+    ctx.lineTo(520, 400);
+    ctx.lineTo(560, 440);
+    ctx.lineTo(600, 400);
+    ctx.lineTo(520, 320);
+    // ctx.lineTo(280, 320);
+
+    ctx.fillStyle = "#0bb0da";
+    ctx.strokeStyle = '#000c0f';
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.restore();
+
+    // 左手
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.arc(220, 420, 30, 0, 2*Math.PI);
+    ctx.fillStyle = "white";
+    ctx.strokeStyle = '#000c0f';
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    // 右手
+    ctx.beginPath();
+    ctx.arc(580, 420, 30, 0, 2*Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    // 两脚
+    ctx.beginPath();
+    // ctx.translate(400, 520);
+    // ctx.rotate(180*Math.PI/180)
+    // ctx.translate(-400, -520);
+    ctx.arc(400, 520, 20, Math.PI, 0);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    // 左脚
+    ctx.beginPath();
+    ctx.moveTo(280, 520);
+    ctx.bezierCurveTo(260, 520, 260, 550, 280, 550);
+    ctx.lineTo(380, 550);
+    ctx.bezierCurveTo(400, 550, 400, 520, 380, 520);
+    ctx.lineTo(280, 520);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    // 右脚
+    ctx.beginPath();
+    ctx.moveTo(520, 520);
+    ctx.bezierCurveTo(540, 520, 540, 550, 520, 550);
+    ctx.lineTo(420, 550);
+    ctx.bezierCurveTo(400, 550, 400, 520, 420, 520);
+    ctx.lineTo(520, 520);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    // 肚子
+    ctx.beginPath();
+    ctx.arc(400, 400, 80, 0, 2*Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.moveTo(340, 400);
+    ctx.lineTo(460, 400);
+    ctx.arc(400, 400, 60, 0, Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.restore();
+
+    // 脸
+    ctx.save();
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.fillStyle = "white";
+
+    ctx.moveTo(330, 120);
+    ctx.quadraticCurveTo(180, 200, 330, 330);
+    ctx.lineTo(470, 330);
+    ctx.quadraticCurveTo(620, 200, 470, 120);
+    ctx.stroke();
+    ctx.fill();
+
+    ctx.closePath();
+    ctx.restore();
+
+    // 鼻子嘴巴链接
+    ctx.save();
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+
+    ctx.moveTo(400, 205);
+    ctx.lineTo(400, 280);
+    ctx.stroke();
+
+    ctx.closePath();
+    ctx.restore();
+
+    // 嘴巴
+    ctx.save();
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+
+    ctx.moveTo(280, 230);
+    ctx.bezierCurveTo(280, 310, 520, 310, 520, 230);
+    ctx.stroke();
+
+    ctx.closePath();
+    ctx.restore();
+
+    // 胡须
+    ctx.save();
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+
+    ctx.moveTo(300, 190);
+    ctx.lineTo(360, 200);
+    ctx.moveTo(300, 205);
+    ctx.lineTo(360, 209);
+    ctx.moveTo(300, 224);
+    ctx.lineTo(360, 218);
+
+    ctx.moveTo(440, 200);
+    ctx.lineTo(500, 190);
+    ctx.moveTo(440, 209);
+    ctx.lineTo(500, 205);
+    ctx.moveTo(440, 218);
+    ctx.lineTo(500, 224);
+
+    ctx.stroke();
+
+    ctx.closePath();
+    ctx.restore();
+    
+    // 鼻子
+    ctx.save();
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.arc(400, 180, 20, 0, 2*Math.PI);
+    ctx.fillStyle = '#d05823'
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    ctx.restore();
+
+    // 左眼
+    ctx.save();
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.fillStyle = 'white';
+    ctx.moveTo(360, 80);
+    ctx.bezierCurveTo(310, 80, 310, 170, 360, 170)
+    ctx.lineTo(360, 170);
+    ctx.bezierCurveTo(410, 170, 410, 80, 360, 80);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    ctx.restore();
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(370, 150, 10, 0, 2*Math.PI);
+    ctx.fillStyle = 'black';
+    ctx.fill();
+    ctx.closePath();
+    ctx.restore();
+
+    // 右眼
+    ctx.save();
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.fillStyle = 'white';
+    ctx.moveTo(440, 80);
+    ctx.bezierCurveTo(390, 80, 390, 170, 440, 170)
+    ctx.lineTo(440, 170);
+    ctx.bezierCurveTo(490, 170, 490, 80, 440, 80);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    ctx.restore();
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(430, 150, 10, 0, 2*Math.PI);
+    ctx.fillStyle = 'black';
+    ctx.fill();
+    ctx.closePath();
+    ctx.restore();
+
+    // 领带
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.moveTo(270, 310);
+    ctx.bezierCurveTo(260, 310, 260, 340, 270, 340);
+    ctx.lineTo(530, 340);
+    ctx.bezierCurveTo(540, 340, 540, 310, 530, 310);
+    ctx.lineTo(270, 310);
+    ctx.fillStyle = '#b13209';
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.restore();
+    
+  </script>
+</body>
+</html>
