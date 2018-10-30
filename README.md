@@ -12,3 +12,6 @@
 
 ## canvas完成的钟表动画
 [预览](https://helenla.github.io/animate/Canvas钟表.html)
+
+## canvas完成的哆啦A梦
+[预览](https://helenla.github.io/animate/Canvas哆啦A梦.html)
